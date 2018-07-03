@@ -1,0 +1,4 @@
+services:
+#    inventory_regular_inventory.example:
+#        class: Inventory\RegularInventoryBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

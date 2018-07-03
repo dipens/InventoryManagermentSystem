@@ -1,0 +1,101 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="app.datagrid.builder.W3viewItemAllocations" class="Inventory\ItemMasterBundle\W3viewItemAllocationsBuilder" >
+            <argument type="service" id="thrace_data_grid.factory.datagrid" />
+            <argument type="service" id="translator" />
+            <argument type="service" id="router" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="service_container" />
+            <argument type="service" id="request_stack" />
+        </service>
+
+        <service id="app.datagrid.W3viewItemAllocations" class="Thrace\DataGridBundle\DataGrid\DataGrid">
+            <factory service="app.datagrid.builder.W3viewItemAllocations" method="build" />
+            <tag name="thrace_data_grid.datagrid" alias="W3viewItemAllocations" />
+        </service>
+
+        <!--<service id="app.datagrid.event_listener.W3viewItemAllocations"
+                 class="Inventory\ItemMasterBundle\EventListener\W3viewItemAllocationsRowListener"
+                >
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+
+            <tag name="kernel.event_listener" event="thrace_datagrid.onRowAdd" method="onRowAdd" />
+            <tag name="kernel.event_listener" event="thrace_datagrid.onRowEdit" method="onRowEdit" />
+            <tag name="kernel.event_listener" event="thrace_datagrid.onRowDel" method="onRowDelete" />
+        </service>-->
+        <service id="app.datagrid.builder.W3viewLogisticsQueueRPL" class="Inventory\ItemMasterBundle\W3viewLogisticsQueueRPLBuilder" >
+            <argument type="service" id="thrace_data_grid.factory.datagrid" />
+            <argument type="service" id="translator" />
+            <argument type="service" id="router" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="service_container" />
+            <argument type="service" id="request_stack" />
+        </service>
+
+        <service id="app.datagrid.W3viewLogisticsQueueRPL" class="Thrace\DataGridBundle\DataGrid\DataGrid">
+            <factory service="app.datagrid.builder.W3viewLogisticsQueueRPL" method="build" />
+            <tag name="thrace_data_grid.datagrid" alias="W3viewLogisticsQueueRPL" />
+        </service>
+
+        <service id="app.datagrid.builder.W3viewItemsComponents" class="Inventory\ItemMasterBundle\W3viewItemsComponentsBuilder" >
+            <argument type="service" id="thrace_data_grid.factory.datagrid" />
+            <argument type="service" id="translator" />
+            <argument type="service" id="router" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="service_container" />
+            <argument type="service" id="request_stack" />
+        </service>
+
+        <service id="app.datagrid.W3viewItemsComponents" class="Thrace\DataGridBundle\DataGrid\DataGrid">
+            <factory service="app.datagrid.builder.W3viewItemsComponents" method="build" />
+            <tag name="thrace_data_grid.datagrid" alias="W3viewItemsComponents" />
+        </service>
+
+        <!--<service id="app.datagrid.event_listener.W3viewItemsComponents"
+                 class="Inventory\ItemMasterBundle\EventListener\W3viewItemsComponentsRowListener"
+                >
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+
+            <tag name="kernel.event_listener" event="thrace_datagrid.onRowAdd" method="onRowAdd" />
+            <tag name="kernel.event_listener" event="thrace_datagrid.onRowEdit" method="onRowEdit" />
+            <tag name="kernel.event_listener" event="thrace_datagrid.onRowDel" method="onRowDelete" />
+        </service>-->
+
+        <service id="app.datagrid.builder.W3viewItemsComponentsKitOrg" class="Inventory\ItemMasterBundle\W3viewItemsComponentsKitOrgBuilder" >
+            <argument type="service" id="thrace_data_grid.factory.datagrid" />
+            <argument type="service" id="translator" />
+            <argument type="service" id="router" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="service_container" />
+            <argument type="service" id="request_stack" />
+        </service>
+
+        <service id="app.datagrid.W3viewItemsComponentsKitOrg" class="Thrace\DataGridBundle\DataGrid\DataGrid">
+            <factory service="app.datagrid.builder.W3viewItemsComponentsKitOrg" method="build" />
+            <tag name="thrace_data_grid.datagrid" alias="W3viewItemsComponentsKitOrg" />
+        </service>
+
+        <!--<service id="app.datagrid.event_listener.W3viewItemsComponentsKitOrg"
+                 class="Inventory\ItemMasterBundle\EventListener\W3viewItemsComponentsKitOrgRowListener"
+                >
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+
+            <tag name="kernel.event_listener" event="thrace_datagrid.onRowAdd" method="onRowAdd" />
+            <tag name="kernel.event_listener" event="thrace_datagrid.onRowEdit" method="onRowEdit" />
+            <tag name="kernel.event_listener" event="thrace_datagrid.onRowDel" method="onRowDelete" />
+        </service>-->
+
+    </services>
+</container>
+
+

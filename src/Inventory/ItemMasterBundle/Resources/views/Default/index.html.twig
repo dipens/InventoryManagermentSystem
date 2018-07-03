@@ -1,0 +1,278 @@
+{% extends "::base.html.twig" %}
+{% block title %}{{ parent() }} {{ Item.Name }}  {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+        form input {
+            display:inline-block;
+            width:125px;
+        }
+        select {
+            display:inline-block;
+            width:125px;
+        }
+        label {
+            display: inline-block;
+            text-align: left;
+            width:40%;
+        }
+        .swaLabel {
+            display: inline-block;
+            text-align: left;
+            width:80px;
+        }
+        .swa2Label {
+            display: inline-block;
+            text-align: left;
+            width:80px;
+        }
+        .smallLabel {
+            display: inline-block;
+            text-align: left;
+            width:11%;
+        }
+        .mediumLabel {
+            display: inline-block;
+            text-align: left;
+            width:80px;
+        }
+        .dateLabel {
+            display: inline-block;
+            text-align: left;
+            width:70px;
+        }
+        .extraSmallLabel {
+            display: inline-block;
+            text-align: left;
+            width:80px;
+        }
+        .secondTDLabel {
+            width:89px;
+        }
+        .firstTDLabel {
+            width:135px;
+        }
+        .thirdTDLabel {
+            width:89px;
+        }
+        .fourthTDLabel {
+            width:135px;
+        }
+        .noteLabel {
+            width:80px;
+            vertical-align: middle;
+        }
+        .note2Label {
+            width:101px;
+            vertical-align: middle;
+        }
+        .titleDiv {
+            text-align: center; 
+            background-color: #D8D8D8;  
+            border: 1px solid black;
+            display:inline-block;
+            width:275px;
+        }
+        .slimTitleDiv {
+            width:232px;
+        }
+        .wideTitleDiv {
+            width:402px;
+        }
+        input[type="checkbox"] {
+            width:10px;
+            vertical-align: -20%
+        }
+        .redRequiredCheckBox {
+            color: #ff0000;
+            outline:solid 2px #ff0000 !important;
+        }
+        .greenYellowSelect {
+            background-color:greenyellow;
+        }
+        #Items_IStatus option[value="E"] {
+            background-color:yellow;
+        }
+        #Items_IStatus option[value="I"] {
+            background-color:yellow;
+        }
+        .yellowSelect {
+            background-color:yellow;
+        }
+        .requiredDiv {
+            border:solid red 2px;
+            display: inline-block;
+            padding: 5px;
+            padding-bottom:0;
+        }
+        .blackDiv {
+            border:solid black 2px;
+            display: inline-block;
+            padding: 5px;
+            padding-bottom:0;
+        }
+        .invisibleDiv {
+            display: block;
+            margin: 7px;
+            margin-top:2px;
+            margin-bottom:0;
+            padding:0
+        }
+        .invisibleDivLessPadding {
+            display: block;
+            margin: 5px;
+        }
+        .smallDate {
+            width:109px
+        }
+        .biggerFontSize {
+            font-size: 13px !important;
+            font-weight: bold !important;
+        }
+    </style>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+
+        var containsOrNot = 'contains';
+        var lastsel2;
+        $(document).one("ajaxStop", function() {
+
+        });
+        $(document).ready(function(){
+
+            var Items = $('#Items');
+            var deleteItem = $("#deleteItem");
+            var ItemsOriginalArray = [];
+            var ItemsToSubmitArray = [];
+            var toSubmitArray = {};
+            $.each( Items[0], function( key, value ) {
+                ItemsOriginalArray[key] = value['value'];
+            });
+            $("input, select, textarea").bind('change',function()
+            {
+                $.each( Items[0], function( key, value ) {
+                    ItemsToSubmitArray[key] = value['value'];
+                });
+                for(var i = 0; i < ItemsOriginalArray.length; i++)
+                {
+                    if(ItemsToSubmitArray[i] != ItemsOriginalArray[i] && Items[0][i]['id'] != '')
+                    {
+                        toSubmitArray[Items[0][i]['id']] = ItemsToSubmitArray[i];
+                    }
+                }
+                saveFormAjax((this).id);
+            });
+
+            function existsInArray(arr,obj) {
+                return (arr.indexOf(obj) != -1);
+            }
+            function saveFormAjax(id)
+            {
+                $.ajax({
+                    type: 'POST',
+                    url: Routing.generate('inventory_item_master_save_item_ajax_homepage', { IPK: {{ IPK }} }),
+                    data: toSubmitArray,
+                    success: function(data){
+                        if(data.success == 'success')
+                        {
+                            ItemsOriginalArray = [];
+                            toSubmitArray = {};
+                            $.each( Items[0], function( key, value ) {
+                                ItemsOriginalArray[key] = value['value'];
+                            });
+                        }
+                        else if(data.success == 'fail')
+                        {
+                            alert("Something terrible happened. Please contact the IT department.")
+                        }
+                    },
+                    error: function(data) {
+                        alert('Your session has expired');
+                    }
+                });
+            }
+
+            deleteItem.click(function(event){
+                event.preventDefault();
+                $("<div title='Confirm Delete?' class = 'ui-state-highlight ui-corner-all'>Are you sure you want to delete this Product?</div>").dialog({
+                    modal: true,
+                    buttons: {
+                        'YES': function () {
+                            $.ajax({
+                                url: Routing.generate('inventory_item_master_delete_item_homepage', { 'IPK' : '{{ Item.id }}'}),
+                                type: 'POST',
+                                success: function(){
+                                    window.location.replace(Routing.generate('inventory_regular_inventory_homepage'));
+                                }
+                            });
+                            $(this).dialog('destroy');
+                        },
+                        'NO': function () {
+                            $(this).dialog('destroy');
+                        }
+                    }
+                });
+            });
+        });
+
+    </script>
+{% endblock %}
+{% block fos_user_content %}
+    <h2>Click outside or hit Tab to save data</h2>
+    {{ form_start(form, {'attr': {'id': 'Items'}}) }}
+            <table>
+                <tr>
+                    <td>
+                        {{ form_errors(form.id) }}
+                        {{ form_widget(form.id) }}
+                    </td>
+                    <td>
+                        {{ form_label(form.name) }}
+                        {{ form_errors(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </td>
+                    <td>
+                        {{ form_label(form.SKU) }}
+                        {{ form_errors(form.SKU) }}
+                        {{ form_widget(form.SKU) }}
+                    </td>
+                    <td>
+                        {{ form_label(form.price) }}
+                        {{ form_errors(form.price) }}
+                        {{ form_widget(form.price) }}
+                    </td>
+                    <td>
+                        {{ form_label(form.quantity) }}
+                        {{ form_errors(form.quantity) }}
+                        {{ form_widget(form.quantity) }}
+                    </td>
+                    <td>
+                        {{ form_label(form.categoryID) }}
+                        {{ form_errors(form.categoryID) }}
+                        {{ form_widget(form.categoryID) }}
+                    </td>
+                    <td>
+                        {{ form_label(form.dateCreated) }}
+                        {{ form_errors(form.dateCreated) }}
+                        {{ form_widget(form.dateCreated) }}
+                    </td>
+                    <td>
+                        {{ form_label(form.dateModified) }}
+                        {{ form_errors(form.dateModified) }}
+                        {{ form_widget(form.dateModified) }}
+                    </td>
+                    <td>
+                        <button class='btn btn-xs btn-info' id = 'deleteItem' type="button">Delete this Product</button>
+                    </td>
+                </tr>
+            </table>
+    {{ form_end(form) }}
+{% endblock %}

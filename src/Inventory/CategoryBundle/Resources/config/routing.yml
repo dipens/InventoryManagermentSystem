@@ -1,0 +1,5 @@
+inventory_category_homepage:
+    path:     /CategoryLookup
+    defaults: { _controller: InventoryCategoryBundle:Default:index }
+    options:
+        expose: true

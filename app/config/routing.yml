@@ -1,0 +1,25 @@
+inventory_category:
+    resource: "@InventoryCategoryBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+thrace_data_grid:
+    resource: "@ThraceDataGridBundle/Resources/config/routing.xml"
+    prefix:   /
+
+inventory_item_master:
+    resource: "@InventoryItemMasterBundle/Resources/config/routing.yml"
+    prefix:   /
+
+inventory_regular_inventory:
+    resource: "@InventoryRegularInventoryBundle/Resources/config/routing.yml"
+    prefix:   /

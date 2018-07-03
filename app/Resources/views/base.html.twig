@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{% endblock %}</title>
+    {% block stylesheets %}
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="{{ asset('bundles/stylesandscripts/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/stylesandscripts/css/bootstrap-theme.min.css') }}">
+        {#<link media="print" rel="stylesheet" href="{{ asset('bundles/stylesandscripts/css/TAPLStyles.css') }}">#}
+        {#<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/base/jquery-ui.css">#}
+        <link rel="stylesheet" href="{{ asset('bundles/stylesandscripts/css/jquery-ui.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/stylesandscripts/css/ui.jqgrid.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/stylesandscripts/css/ui.multiselect.css') }}">
+        {#<link href="{{ asset('bundles/stylesandscripts/css/bootstrap-editable.css') }}" rel="stylesheet"/>#}
+        <link rel="stylesheet" href="{{ asset('bundles/stylesandscripts/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/foscomment/css/comments.css') }}">
+        <style>
+
+            .navbar-default {
+                background-image: none;
+                background-color: #dfeffc;
+                border-color: #dfeffc;
+            }
+            .navbar-default .navbar-brand {
+                color: #12687e;
+            }
+            .navbar-default .navbar-brand:hover,
+            .navbar-default .navbar-brand:focus {
+                color: #ffbbbc;
+            }
+            .navbar-default .navbar-text {
+                color: #12687e;
+            }
+            .navbar-default .navbar-nav > li > a {
+                color: #12687e;
+            }
+            .navbar-default .navbar-nav > li > a:hover,
+            .navbar-default .navbar-nav > li > a:focus {
+                color: #ffbbbc;
+            }
+            .navbar-default .navbar-nav > li > .dropdown-menu {
+                background-color: #dfeffc;
+            }
+            .navbar-default .navbar-nav > li > .dropdown-menu > li > a {
+                color: #12687e;
+            }
+            .navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
+            .navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
+                color: #ffbbbc;
+                background-color: #dfeffc;
+            }
+            .navbar-default .navbar-nav > li > .dropdown-menu > li > .divider {
+                background-color: #dfeffc;
+            }
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+            .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+                color: #ffbbbc;
+                background-color: #dfeffc;
+            }
+            .navbar-default .navbar-nav > .active > a,
+            .navbar-default .navbar-nav > .active > a:hover,
+            .navbar-default .navbar-nav > .active > a:focus {
+                color: #ffbbbc;
+                background-color: #dfeffc;
+            }
+            .navbar-default .navbar-nav > .open > a,
+            .navbar-default .navbar-nav > .open > a:hover,
+            .navbar-default .navbar-nav > .open > a:focus {
+                color: #ffbbbc;
+                background-color: #dfeffc;
+            }
+            .navbar-default .navbar-toggle {
+                border-color: #dfeffc;
+            }
+            .navbar-default .navbar-toggle:hover,
+            .navbar-default .navbar-toggle:focus {
+                background-color: #dfeffc;
+            }
+            .navbar-default .navbar-toggle .icon-bar {
+                background-color: #12687e;
+            }
+            .navbar-default .navbar-collapse,
+            .navbar-default .navbar-form {
+                border-color: #12687e;
+            }
+            .navbar-default .navbar-link {
+                color: #12687e;
+            }
+            .navbar-default .navbar-link:hover {
+                color: #ffbbbc;
+            }
+
+            @media (max-width: 767px) {
+                .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+                    color: #12687e;
+                }
+                .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+                .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+                    color: #ffbbbc;
+                }
+                .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+                .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+                .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+                    color: #ffbbbc;
+                    background-color: #dfeffc;
+                }
+            }
+
+
+            .navbar-collapse.in {
+                overflow-y: visible !important;
+            }
+            .navbar {
+                margin-bottom: 0 !important;
+            }
+            #menu-item li{
+                width: 18%;
+                float: left;
+            }
+            .dropdown-menu li{
+                width: 100% !important;
+                float: left;
+            }
+
+            #zoom_triggers li
+            {
+                display: inline;
+            }
+            .dropdown-menu li
+            {
+                float: none !important;
+                width: 100% !important;
+                font-size:80%; !important;
+            }
+            .padding-row{
+                padding-right: 10px !important;
+            }
+            .padding-row-left{
+                padding-left: 10px !important;
+            }
+            .disabledLink {
+                color: gray !important;
+                text-decoration: none;
+                pointer-events: none;
+            }
+            .disabledDropdown {
+                color: gray;
+                text-decoration: none;
+                pointer-events: none;
+            }
+            input[readonly], select[disabled], textarea[readonly]
+            {
+                background-color: #efefef;
+            }
+            input[type="text"][disabled]{background-color:#efefef;}
+            .ui-autocomplete {
+                max-height: 350px;
+                width: 400px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+                background:   #4fdfff;
+                font-weight: normal !important;
+            }
+            #menu {
+                font-family: Calibri, Monaco, monospace;
+                font-size: small;
+            }
+            .requiredType {border:solid 2px red !important;}
+            .requiredLabel {color:red}
+            .optionalRequiredType {border:dashed 1px red !important;}
+            .ui-dialog, .ui-dialog-titlebar, .ui-button-text, .ui-state-highlight, .ui-button, .ui-button:hover, .ui-button:focus, .ui-dialog-buttonpane, .ui-dialog-content {
+                background-color: #fe8403  !important;
+                border: 1px solid #f21a2d !important;
+                background-image: none;
+                color: #000000 !important;
+                font-weight: normal;
+            }
+            .ui-dialog-title {
+                font-weight: bold;
+            }
+            .ui-icon-closethick {
+                color: #000000;
+                background-image: url("{{ asset('bundles/stylesandscripts/css/images/ui-icons_000000_256x240.png') }}") !important;
+            }
+            /*            .ui-dialog, .ui-state-highlight {
+                            background:#F9A7AE !important;,
+                            border: 1px solid #f21a2d !important;
+                        }*/
+            textarea, select, input {border:groove 1px black !important;}
+            label{font-weight:normal !important;}
+            input[type=number]::-webkit-outer-spin-button,
+            input[type=number]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            input[type=number] {
+                -moz-appearance:textfield;
+            }
+            .dropdown-menu {
+                background-color: #B8B1B1;
+                color: #ffff00;
+            }
+            .dropdown-menu li a:focus, .dropdown-menu li a:hover {
+                color: orange; !important;
+            }
+            label {
+                text-align: left;
+                font-size:90% !important;
+            }
+            input {
+                font-size:90% !important;
+            }
+            .ui-jqgrid {
+                font-size:1.0em !important;
+            }
+            .ui-jqgrid-view {
+                font-size: 1.1em !important;
+            }
+            .ui-tabs {
+                font-size:95% !important;
+            }
+            .ui-autocomplete-input {
+                background: #4fdfff none repeat scroll 0 0;
+            }
+            input[type="checkbox"], input[type="radio"] {
+                line-height: normal;
+                margin: 0;
+            }
+            .ui-jqgrid tr.jqgrow td {
+                word-wrap: break-word; /* IE 5.5+ and CSS3 */
+                white-space: pre-wrap; /* CSS3 */
+                white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+                white-space: -pre-wrap; /* Opera 4-6 */
+                white-space: -o-pre-wrap; /* Opera 7 */
+                overflow: hidden;
+                height: auto;
+                vertical-align: middle;
+                padding-top: 3px;
+                padding-bottom: 3px
+            }
+            /*            .ui-jqgrid {
+                            font-size:1.0em !important;
+                        }*/
+        </style>
+    {% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('bundles/stylesandscripts/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/stylesandscripts/js/jquery.cookie.js') }}"></script>
+        {#<script src="{{ asset('bundles/stylesandscripts/js/bootstrap.min.js') }}"></script>#}
+        <script src="{{ asset('bundles/stylesandscripts/js/bootstrap.min.js') }}"></script>
+        <!--<script src="{{ asset('bundles/stylesandscripts/js/i18n/grid.locale-en.js') }}" ></script>-->
+        <script src="{{ asset('bundles/stylesandscripts/js/grid.locale-en.js') }}"></script>
+        <script src="{{ asset('bundles/stylesandscripts/js/jquery.jqgrid.src.js') }}" ></script>
+        <script src="{{ asset('bundles/stylesandscripts/js/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('bundles/stylesandscripts/js/i18n/jquery-ui-i18n.min.js') }}"></script>
+        <script src="{{ asset('bundles/stylesandscripts/js/jquery-migrate-1.2.1.min.js') }}" ></script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+        <script src="{{ asset('bundles/stylesandscripts/js/jquery.validate.js') }}"></script>
+        {#<script type="text/javascript" src="{{ asset('bundles/stylesandscripts/js/prettyCheckboxes.js') }}"></script>#}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<div>
+    {% block fos_user_content %}
+    {% endblock fos_user_content %}
+</div>
+{% block body %}
+{% endblock %}
+</body>
+</html>

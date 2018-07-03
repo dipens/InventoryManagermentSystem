@@ -1,0 +1,5 @@
+inventory_regular_inventory_homepage:
+    path:     /Inventory/RegularInventoryLookup
+    defaults: { _controller: InventoryRegularInventoryBundle:Default:index }
+    options:
+        expose: true

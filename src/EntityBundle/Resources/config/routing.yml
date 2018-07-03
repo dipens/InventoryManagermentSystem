@@ -1,0 +1,5 @@
+entity_homepage:
+    path:     /EntityBundle
+    defaults: { _controller: EntityBundle:Default:index }
+    options:
+        expose: true

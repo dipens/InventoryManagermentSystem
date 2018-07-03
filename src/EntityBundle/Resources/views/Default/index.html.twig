@@ -1,0 +1,4 @@
+{% extends "::base.html.twig" %}
+{%  block fos_user_content %}
+{% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': 1, 'view' : 'tree'} %}
+{% endblock %}

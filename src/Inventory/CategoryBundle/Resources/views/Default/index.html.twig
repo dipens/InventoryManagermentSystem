@@ -1,0 +1,88 @@
+{% extends "::base.html.twig" %}
+{% block title %}{{ parent() }} Inventory Lookup{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .ui-jqgrid .ui-userdata { height: auto; }
+        .ui-jqgrid .ui-userdata div { margin: .1em .5em .2em;}
+        .ui-jqgrid .ui-userdata div>* { vertical-align: middle; }
+        .ui-jqgrid .ui-jqgrid-htable th {
+            height: 2em !important;
+        }
+        .ui-jqgrid tr.jqgrow td{height:4px;}
+        .ui-jqgrid tr.jqgrow td {white-space:nowrap;}
+    </style>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            //GRID START
+            var $grid = $("#list");
+            var createNewItem = $("#createNewItem");
+            var commonSettings = {
+                align: 'left',
+                searchoptions:{sopt:["cn","eq","ne","lt","le","gt","ge","bw","ew","nc"]},
+                width: 100,
+                editable: false,
+                formatoptions: {disabled: false}
+            };
+            var cm = [
+                {name: "id", index: "o.id", jsonmap: "cell.0", width: 200, classes: 'padding-row-left' },
+                {name: "CategoryName", index: "o.CategoryName", jsonmap: "cell.1", width: 200, classes: 'padding-row-left'}
+            ];
+            var cn = ['ID', 'Category Name'];
+            $grid.jqGrid({
+                url: "{{ path('thrace_data_grid.data', {'name': 'W3viewCategoryList'}) }}",
+                postData: {
+                },
+                datatype: "json",
+                mtype: 'POST',
+                colNames: cn,
+                colModel: cm,
+                iconSet: "fontAwesome",
+                autoResizing: { compact: true },
+                jsonReader: {repeatitems: false},
+                height: 750,
+                autowidth: true,
+                width: null,
+                rowNum: 50,
+                rowTotal: 1000000,
+                gridview: true,
+                autoencode: false,
+                pager: '#pager',
+                shrinkToFit: false,
+                sortable: true,
+                sortname:"o.id",
+                sortorder: "asc",
+                viewrecords: true,
+                loadonce:false,
+                cmTemplate: commonSettings,
+                rowList: [50, 100, 500, 1000]
+            });
+            $.extend($.jgrid.search, {
+                multipleSearch: true,
+                multipleGroup: true,
+                recreateFilter: true,
+                closeOnEscape: true,
+                closeAfterSearch: true
+                //overlay: 0
+            });
+            $grid.jqGrid('navGrid','#pager',{del:false,add:false,edit:false,search: true},{ },{},{},{multipleSearch:true});
+            $grid.jqGrid('filterToolbar',{
+                searchOperators: true,
+                stringResult: true,
+                searchOnEnter : true,
+                sopt: ['cn','eq','ne','lt','le','gt','ge','bw','ew','nc']
+            });
+            $grid.jqGrid('bindKeys');
+            $(window).focus(function() {
+                $('#list').trigger("reloadGrid");
+            });
+        });
+    </script>
+{%  endblock %}
+{%  block fos_user_content %}
+    <table id="list"></table>
+    <div id="pager"></div>
+{% endblock %}

@@ -1,0 +1,24 @@
+inventory_item_master_homepage:
+    path:     /Inventory/ItemMaster/{IPK}
+    defaults: { _controller: InventoryItemMasterBundle:Default:index }
+    options:
+        expose: true
+
+inventory_item_master_new_homepage:
+    path:     /Inventory/ItemMasterCreateItem
+    defaults: {_controller: InventoryItemMasterBundle:Default:createItem }
+    options:
+        expose: true
+
+inventory_item_master_delete_item_homepage:
+    path:     /Inventory/ItemMasterDeleteItem/{IPK}
+    defaults: { _controller: InventoryItemMasterBundle:Default:deleteItem }
+    options:
+        expose: true
+
+
+inventory_item_master_save_item_ajax_homepage:
+    path:     /Inventory/ItemMasterSaveItemAjax/{IPK}
+    defaults: { _controller: InventoryItemMasterBundle:Default:saveItemAjax }
+    options:
+        expose: true
