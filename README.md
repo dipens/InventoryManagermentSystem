@@ -11,8 +11,6 @@ Tech Stack:
 
 MySQL structure
 ~~~sql
-mysql> USE TN2
-ERROR 1049 (42000): Unknown database 'TN2'
 mysql> USE TN;
 Reading table information for completion of table and column names
 You can turn off this feature to get a quicker startup with -A
