@@ -1,0 +1,24 @@
+body{
+    pointer-events:none;
+}
+form{
+    pointer-events: all;
+}
+#form_product_edit button{
+    pointer-events:none;
+}
+.ui-jqgrid-labels, .ui-search-table, .ui-pg-table{
+    pointer-events: all;
+}
+.jqgrow {
+    pointer-events:all;
+}
+.nav-pills {
+    pointer-events: all;
+}
+#TAPL {
+    pointer-events: all;
+}
+#changeVendor {
+    pointer-events:none;
+}

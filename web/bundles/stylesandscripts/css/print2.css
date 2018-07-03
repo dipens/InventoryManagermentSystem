@@ -1,0 +1,52 @@
+
+    html, body {
+        font-size:100%;
+
+    }
+    * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
+    a, a:visited { text-decoration: underline; }
+    a[href]:after { content: attr(title); }
+    abbr[title]:after { content: attr(title); }
+    .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+    pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+    thead { display: table-header-group; }
+    tr, img { page-break-inside: avoid; }
+    img { max-width: 100% !important; }
+    p, h2, h3 { orphans: 3; widows: 3; }
+    h2, h3 { page-break-after: avoid; }
+    table, th, td {
+        border: 1px solid black;
+    }
+    #content {
+        display: table;
+    }
+
+    #pageFooter {
+        display: table-footer-group;
+    }
+
+    #pageFooter:after {
+        counter-increment: page;
+        content: counter(page);
+    }
+    input,select {display: none}
+    #alertmod_list { display: none !important;}
+    .ui-search-toolbar, #pager, .ui-pg-table {
+        display: none; !important;
+        border: none; !important;}
+    @page {
+        @bottom-left {
+            content: ""
+        }
+        @top-left {
+            content: "";
+        }
+        @top-right {
+            content: "";
+        }
+        @bottom-right {
+            content: counter(page) " of " counter(pages);
+        }
+        size: landscape
+        margin: 0.5cm;
+    }

@@ -1,0 +1,22 @@
+@media print {
+    table { page-break-inside: avoid; !important;, page-break-after: always; !important;}
+    table, th, td {
+        border: none;
+    }
+    @page {
+        @bottom-left {
+            content: ""
+        }
+        @top-left {
+            content: "";
+        }
+        @top-right {
+            content: "";
+        }
+        @bottom-right {
+            content: "";
+        }
+        size: auto
+    margin: 0.5cm;
+    }
+}
