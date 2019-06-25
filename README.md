@@ -1,4 +1,4 @@
-Sample Project for TalentNet.
+Inventory Management System.
 
 Tech Stack:
 <ul>
